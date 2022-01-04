@@ -2,8 +2,8 @@ package com.siregarmartin.loginwithmvvm.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.siregarmartin.loginwithmvvm.repository.AuthRepository
-import com.siregarmartin.loginwithmvvm.repository.BaseRepository
+import com.siregarmartin.loginwithmvvm.data.repository.AuthRepository
+import com.siregarmartin.loginwithmvvm.data.repository.BaseRepository
 import com.siregarmartin.loginwithmvvm.ui.auth.AuthViewModel
 import java.lang.IllegalArgumentException
 

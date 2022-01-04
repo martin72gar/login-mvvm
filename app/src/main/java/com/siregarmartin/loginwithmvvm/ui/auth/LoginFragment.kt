@@ -1,18 +1,17 @@
 package com.siregarmartin.loginwithmvvm.ui.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
-import com.siregarmartin.loginwithmvvm.R
+import androidx.lifecycle.lifecycleScope
 import com.siregarmartin.loginwithmvvm.databinding.FragmentLoginBinding
-import com.siregarmartin.loginwithmvvm.network.AuthApi
-import com.siregarmartin.loginwithmvvm.network.Resource
-import com.siregarmartin.loginwithmvvm.repository.AuthRepository
+import com.siregarmartin.loginwithmvvm.data.network.AuthApi
+import com.siregarmartin.loginwithmvvm.data.network.Resource
+import com.siregarmartin.loginwithmvvm.data.repository.AuthRepository
 import com.siregarmartin.loginwithmvvm.ui.base.BaseFragment
+import kotlinx.coroutines.launch
 
 class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepository>() {
 
@@ -22,7 +21,9 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             when(it) {
                 is Resource.Success -> {
-                    Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
+                    lifecycleScope.launch {
+                        userPreferences.saveAuthToken(it.value.user.access_token)
+                    }
                 }
                 is Resource.Failure -> {
                     Toast.makeText(requireContext(), "Login Failure", Toast.LENGTH_SHORT).show()

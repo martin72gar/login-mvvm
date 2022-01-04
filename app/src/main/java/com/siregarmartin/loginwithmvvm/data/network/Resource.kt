@@ -1,4 +1,4 @@
-package com.siregarmartin.loginwithmvvm.network
+package com.siregarmartin.loginwithmvvm.data.network
 
 import okhttp3.ResponseBody
 

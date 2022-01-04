@@ -1,4 +1,4 @@
-package com.siregarmartin.loginwithmvvm.responses
+package com.siregarmartin.loginwithmvvm.data.responses
 
 data class User(
     val access_token: String,

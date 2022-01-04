@@ -1,6 +1,6 @@
-package com.siregarmartin.loginwithmvvm.repository
+package com.siregarmartin.loginwithmvvm.data.repository
 
-import com.siregarmartin.loginwithmvvm.network.Resource
+import com.siregarmartin.loginwithmvvm.data.network.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException

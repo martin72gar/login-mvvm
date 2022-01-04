@@ -1,4 +1,4 @@
-package com.siregarmartin.loginwithmvvm.network
+package com.siregarmartin.loginwithmvvm.data.network
 
 import com.siregarmartin.loginwithmvvm.BuildConfig
 import okhttp3.OkHttpClient

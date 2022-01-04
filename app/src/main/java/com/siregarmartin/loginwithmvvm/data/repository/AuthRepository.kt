@@ -1,6 +1,6 @@
-package com.siregarmartin.loginwithmvvm.repository
+package com.siregarmartin.loginwithmvvm.data.repository
 
-import com.siregarmartin.loginwithmvvm.network.AuthApi
+import com.siregarmartin.loginwithmvvm.data.network.AuthApi
 
 class AuthRepository(
     private val api: AuthApi

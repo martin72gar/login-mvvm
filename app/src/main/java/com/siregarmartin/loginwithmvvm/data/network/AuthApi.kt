@@ -1,6 +1,6 @@
-package com.siregarmartin.loginwithmvvm.network
+package com.siregarmartin.loginwithmvvm.data.network
 
-import com.siregarmartin.loginwithmvvm.responses.LoginResponse
+import com.siregarmartin.loginwithmvvm.data.responses.LoginResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
