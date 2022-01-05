@@ -13,6 +13,7 @@ import com.siregarmartin.loginwithmvvm.data.network.Resource
 import com.siregarmartin.loginwithmvvm.data.repository.AuthRepository
 import com.siregarmartin.loginwithmvvm.ui.base.BaseFragment
 import com.siregarmartin.loginwithmvvm.ui.enable
+import com.siregarmartin.loginwithmvvm.ui.handleApiError
 import com.siregarmartin.loginwithmvvm.ui.home.HomeActivity
 import com.siregarmartin.loginwithmvvm.ui.startNewActivity
 import com.siregarmartin.loginwithmvvm.ui.visible
@@ -23,19 +24,18 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.progressbar.visible(false)
         binding.buttonLogin.enable(false)
 
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
-            binding.progressbar.visible(false)
+            binding.progressbar.visible(it is Resource.Loading)
             when (it) {
                 is Resource.Success -> {
-                    viewModel.saveAuthToken(it.value.user.access_token!!)
-                    requireActivity().startNewActivity(HomeActivity::class.java)
+                    lifecycleScope.launch {
+                        viewModel.saveAuthToken(it.value.user.access_token!!)
+                        requireActivity().startNewActivity(HomeActivity::class.java)
+                    }
                 }
-                is Resource.Failure -> {
-                    Toast.makeText(requireContext(), "Login Failure", Toast.LENGTH_SHORT).show()
-                }
+                is Resource.Failure -> handleApiError(it)
             }
         })
 
@@ -48,7 +48,6 @@ class LoginFragment : BaseFragment<AuthViewModel, FragmentLoginBinding, AuthRepo
             val email = binding.editTextTextEmailAddress.text.toString().trim()
             val password = binding.editTextTextPassword.text.toString().trim()
 
-            binding.progressbar.visible(true)
             viewModel.login(email, password)
         }
     }

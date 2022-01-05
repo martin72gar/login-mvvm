@@ -17,13 +17,12 @@ class AuthViewModel(
     val loginResponse: LiveData<Resource<LoginResponse>>
         get() = _loginResponse
 
-    fun login (email: String, password: String) = viewModelScope.launch {
+    fun login(email: String, password: String) = viewModelScope.launch {
+        _loginResponse.value = Resource.Loading
         _loginResponse.value = repository.login(email, password)
     }
 
-    fun saveAuthToken(token: String) {
-        viewModelScope.launch {
-            repository.saveAuthToken(token)
-        }
+    suspend fun saveAuthToken(token: String) {
+        repository.saveAuthToken(token)
     }
 }
