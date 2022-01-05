@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.siregarmartin.loginwithmvvm.data.network.Resource
 import com.siregarmartin.loginwithmvvm.ui.auth.LoginFragment
+import com.siregarmartin.loginwithmvvm.ui.base.BaseFragment
 
 fun<A: Activity> Activity.startNewActivity(activity: Class<A>) {
     Intent(this, activity).also {
@@ -46,8 +47,7 @@ fun Fragment.handleApiError(
             if(this is LoginFragment) {
                 requireView().snackbar("You've entered incorrect email or password")
             } else {
-                //TODO Perform logout operation
-
+                (this as BaseFragment<*,*,*>).logout()
             }
         }
         else -> {

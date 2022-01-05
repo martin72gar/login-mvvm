@@ -7,11 +7,12 @@ import androidx.lifecycle.viewModelScope
 import com.siregarmartin.loginwithmvvm.data.network.Resource
 import com.siregarmartin.loginwithmvvm.data.repository.UserRepository
 import com.siregarmartin.loginwithmvvm.data.responses.LoginResponse
+import com.siregarmartin.loginwithmvvm.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel (
     private val repository: UserRepository
-) : ViewModel() {
+) : BaseViewModel(repository) {
 
     private val _user: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
     val user: LiveData<Resource<LoginResponse>>
