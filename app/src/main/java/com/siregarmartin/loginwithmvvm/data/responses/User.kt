@@ -1,7 +1,7 @@
 package com.siregarmartin.loginwithmvvm.data.responses
 
 data class User(
-    val access_token: String,
+    val access_token: String?,
     val created_at: String,
     val email: String,
     val email_verified_at: Any,
